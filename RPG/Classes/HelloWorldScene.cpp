@@ -76,6 +76,32 @@ bool HelloWorld::init()
     this->addChild(pTileMap);
     pTileMap->setPosition(ccp(0, 0));
     
+    // キャラクタ表示
+    CCSprite* pSpritesCharacter[12]; // スプライトの数
+    const int WIDTH_SIZE  = 96;     // 一つのスプライトの幅
+    const int HEIGHT_SIZE = 64;     // 一つのスプライトの高さ
+    
+    //「character.png」からスプライトフレームへの切り出し
+    int i=0;
+    for (int y=0;y<4; y++) {
+        for (int x=0;x<3; x++) {
+            CCRect rect(float(x * WIDTH_SIZE),  // X座標
+                        float(y * HEIGHT_SIZE), // Y座標
+                        float(WIDTH_SIZE),      // 幅
+                        float(HEIGHT_SIZE));    // 高さ
+            pSpritesCharacter[i++] = CCSprite::create("character.png", rect);
+        }
+    }
+    
+     // 座標を確定して、シーンに追加
+     for (int i=0; i<12; i++)
+     {
+         int x = 50;
+         int y = 50;
+         pSpritesCharacter[i]->setPosition(ccp(x + (i * 50), y + (i * 50)));
+         this->addChild(pSpritesCharacter[i]);
+     }
+    
     return true;
 }
 
