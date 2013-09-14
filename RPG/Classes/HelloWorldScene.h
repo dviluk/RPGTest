@@ -21,6 +21,21 @@ public:
     void ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     void ccTouchCancelled(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     void update(float delta);
+    
+    // タグ
+    const int TAG_MAP = 10;
+    
+    // プレイヤー向きの定数
+    const int PLAYER_FRONT = 1;
+    const int PLAYER_BACK  = 2;
+    const int PLAYER_LEFT  = 3;
+    const int PLAYER_RIGHT = 4;
+    
+    // プレイヤー向き
+    int PlayerDirectcion = PLAYER_FRONT;
+    
+    cocos2d::CCSprite *pPlayer;
+    cocos2d::CCAnimation *pAnimation;
 
     // preprocessor macro for "static create()" constructor ( node() deprecated )
     CREATE_FUNC(HelloWorld);
