@@ -71,6 +71,11 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
     
+    // マップチップ表示
+    CCTMXTiledMap* pTileMap = CCTMXTiledMap::create("desert.tmx");
+    this->addChild(pTileMap);
+    pTileMap->setPosition(ccp(0, 0));
+    
     return true;
 }
 
