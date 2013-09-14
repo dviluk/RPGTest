@@ -11,10 +11,10 @@ CCScene* HelloWorld::scene()
     
     // 'layer' is an autorelease object
     HelloWorld *layer = HelloWorld::create();
-
+    
     // add layer as a child to scene
     scene->addChild(layer);
-
+    
     // return the scene
     return scene;
 }
@@ -28,69 +28,62 @@ bool HelloWorld::init()
     {
         return false;
     }
-
+    
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
-
+    
     // add a "close" icon to exit the progress. it's an autorelease object
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
-                                        "CloseNormal.png",
-                                        "CloseSelected.png",
-                                        this,
-                                        menu_selector(HelloWorld::menuCloseCallback) );
+                                                          "CloseNormal.png",
+                                                          "CloseSelected.png",
+                                                          this,
+                                                          menu_selector(HelloWorld::menuCloseCallback) );
     pCloseItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
-
+    
     // create menu, it's an autorelease object
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
     pMenu->setPosition( CCPointZero );
     this->addChild(pMenu, 1);
-
+    
     /////////////////////////////
     // 3. add your codes below...
-
+    
     // add a label shows "Hello World"
     // create and initialize a label
     CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Thonburi", 34);
-
+    
     // ask director the window size
     CCSize size = CCDirector::sharedDirector()->getWinSize();
-
+    
+    CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
+    
     // position the label on the center of the screen
     pLabel->setPosition( ccp(size.width / 2, size.height - 20) );
-
+    
     // add the label as a child to this layer
     this->addChild(pLabel, 1);
-
-    // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    pSprite->setPosition( ccp(size.width/2, size.height/2) );
-
-    // add the sprite as a child to this layer
-    this->addChild(pSprite, 0);
-
+    
     // マップチップ表示
     CCTMXTiledMap* pTileMap = CCTMXTiledMap::create("desert.tmx");
     this->addChild(pTileMap);
-    pTileMap->setPosition(ccp(0, 0));
-    pTileMap->setTag(10);
+    pTileMap->setTag(TAG_MAP);
     
-    // キャラクタ表示
-    CCSpriteFrame* pSpritesCharacter[12]; // スプライトフレームの数
-    const int WIDTH_SIZE  = 96;      	  // 一つのスプライトの幅
-    const int HEIGHT_SIZE = 64;      	  // 一つのスプライトの高さ
+    // キャラクターアニメーション設定
+    CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
+    CCSpriteFrame* pSpritesCharacter[12];     // 12個分のスプライトの配列を用意する
+    const int X_SIZE = 96;// ピースの横幅
+    const int Y_SIZE = 64;// ピースの縦幅
     
-    //「character.png」からスプライトフレームへの切り出し
-    int i=0;
+    int ix=0;
     for (int y=0;y<4; y++) {
         for (int x=0;x<3; x++) {
-            CCRect rect(float(x * WIDTH_SIZE),  // X座標
-                        float(y * HEIGHT_SIZE), // Y座標
-                        float(WIDTH_SIZE),      // 幅
-                        float(HEIGHT_SIZE));    // 高さ
-            pSpritesCharacter[i++] = CCSpriteFrame::create("character.png", rect);
+            CCRect rect(float(x*X_SIZE), // X座標
+                        float(y*Y_SIZE), // Y座標
+                        float(X_SIZE),   // 幅
+                        float(Y_SIZE));  // 高さ
+            pSpritesCharacter[ix] = CCSpriteFrame::create("character.png", rect);
+            ix++;
         }
     }
     
@@ -116,7 +109,12 @@ bool HelloWorld::init()
     pAnimationLeft->setDelayPerUnit(0.5f);
     pAnimationRight->setDelayPerUnit(0.5f);
     
-    CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
+    // 全フレーム表示後は１フレームに戻る
+    pAnimationFront->setRestoreOriginalFrame(true);
+    pAnimationBack->setRestoreOriginalFrame(true);
+    pAnimationLeft->setRestoreOriginalFrame(true);
+    pAnimationRight->setRestoreOriginalFrame(true);
+    
     pAnimationCache->addAnimation( pAnimationFront, "FRONT" );
     pAnimationCache->addAnimation( pAnimationBack,  "BACK" );
     pAnimationCache->addAnimation( pAnimationLeft,  "LEFT" );
@@ -128,7 +126,7 @@ bool HelloWorld::init()
     CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation) );
     
     // add "HelloWorld" splash screen"
-    CCSprite* pPlayer= CCSprite::create();
+    pPlayer= CCSprite::create();
     
     // 主人公は常に中心
     pPlayer->setPosition( ccp(size.width/2, size.height/2));
@@ -138,11 +136,11 @@ bool HelloWorld::init()
     
     // アニメーションを実行
     pPlayer->runAction(pAction);
-
+    
     // タッチイベント有効
     this->setTouchMode(kCCTouchesOneByOne);
-    this->setTouchEnabled(true);    
-    
+    this->setTouchEnabled(true);
+
     return true;
 }
 
@@ -157,7 +155,6 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
     CCPoint abPoint;
     CCPoint tileLocation = pTileMap->getPosition();
     CCPoint point = pTouch->getLocationInView();
-    
     CCLOG("タッチ座標(画面のピクセル) %f,%f",point.x, point.y);
     CCLOG("タイルロケーション(タイルマップの左下位置) %f,%f",tileLocation.x, tileLocation.y);
     
@@ -176,12 +173,13 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
     CCLOG("タイルサイズ(1タイル分) %f,%f",tileSize.width, tileSize.height);
     
     // どの方向に移動するか
-    // 中心座標からタッチ座標の距離を算出
+    // 中心座標から、タッチ座標の距離を算出
     charePoint.x = screensize.width/2;
     charePoint.y = screensize.height/2;
     
     int xdiff = touchPoint.x - charePoint.x;
     int ydiff = touchPoint.y - charePoint.y;
+    
     int abs_x = abs(xdiff);
     int abx_y = abs(ydiff);
     
@@ -210,6 +208,7 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
                 CCLOG("左向き");
                 pAnimation = pAnimationCache->animationByName("LEFT");
                 PlayerDirectcion = PLAYER_LEFT;
+                
             }
             else
             {
@@ -218,6 +217,7 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
                 PlayerDirectcion = PLAYER_BACK;
             }
         }
+        
     }
     else
     {
@@ -228,6 +228,7 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
                 CCLOG("右向き");
                 pAnimation = pAnimationCache->animationByName("RIGHT");
                 PlayerDirectcion = PLAYER_RIGHT;
+                
             }
             else
             {
@@ -235,6 +236,7 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
                 pAnimation = pAnimationCache->animationByName("FRONT");
                 PlayerDirectcion = PLAYER_FRONT;
             }
+            
         }
         else
         {
@@ -254,8 +256,32 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
     }
     
     // アニメーションを実行
+    pPlayer->stopAllActions();
     this->schedule(schedule_selector(HelloWorld::update), 0.11f);
-     
+    
+    CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation));
+    pPlayer->runAction(pAction);
+    
+    CCPoint newTilemapPoint;
+    newTilemapPoint = pTileMap->getPosition();
+    
+    switch (PlayerDirectcion) {
+        case 2:
+            newTilemapPoint.y -= 32;
+            break;
+        case 1:
+            newTilemapPoint.y += 32;
+            break;
+        case 3:
+            newTilemapPoint.x += 32;
+            break;
+        case 4:
+            newTilemapPoint.x -= 32;
+            break;
+        default:
+            break;
+    }
+    
     return true;
 }
 
@@ -265,7 +291,7 @@ void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
     this->unschedule(schedule_selector(HelloWorld::update));
 }
 
-void HelloWorld::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
+void HelloWorld::ccTouchMoved(CCTouch *pTouch, cocos2d::CCEvent *pEvent)
 {
     CCLOG("ccTouchMoved");
 }
@@ -278,19 +304,19 @@ void HelloWorld::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent)
 void HelloWorld::update(float delta)
 {
     CCLOG("update %f",delta);
-    
     CCTMXTiledMap* pTileMap = (CCTMXTiledMap*)this->getChildByTag(TAG_MAP);
-    CCSize screensize = CCDirector::sharedDirector()->getWinSize();
-    CCPoint newTilemapPoint;
     
+    CCSize screensize = CCDirector::sharedDirector()->getWinSize();
+    
+    CCPoint newTilemapPoint;
     newTilemapPoint = pTileMap->getPosition();
     
     switch (PlayerDirectcion) {
-        case 1:
-            newTilemapPoint.y += 32;
-            break;
         case 2:
             newTilemapPoint.y -= 32;
+            break;
+        case 1:
+            newTilemapPoint.y += 32;
             break;
         case 3:
             newTilemapPoint.x += 32;
@@ -310,7 +336,7 @@ void HelloWorld::update(float delta)
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {
     CCDirector::sharedDirector()->end();
-
+    
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
