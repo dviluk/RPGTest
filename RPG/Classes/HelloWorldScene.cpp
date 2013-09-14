@@ -137,8 +137,39 @@ bool HelloWorld::init()
     
     // アニメーションを実行
     pPlayer->runAction(pAction);
+
+    // タッチイベント有効
+    this->setTouchMode(kCCTouchesOneByOne);
+    this->setTouchEnabled(true);    
     
     return true;
+}
+
+bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
+{
+    CCLOG("ccTouchBegan");
+    
+    return true;
+}
+
+void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
+{
+    CCLOG("ccTouchEnded");
+}
+
+void HelloWorld::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
+{
+    CCLOG("ccTouchMoved");
+}
+
+void HelloWorld::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent)
+{
+    CCLOG("ccTouchCancelled");
+}
+
+void HelloWorld::update(float delta)
+{
+    CCLOG("upcate");
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
