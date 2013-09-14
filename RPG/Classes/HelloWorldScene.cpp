@@ -70,16 +70,16 @@ bool HelloWorld::init()
 
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
-    
+
     // マップチップ表示
     CCTMXTiledMap* pTileMap = CCTMXTiledMap::create("desert.tmx");
     this->addChild(pTileMap);
     pTileMap->setPosition(ccp(0, 0));
     
     // キャラクタ表示
-    CCSprite* pSpritesCharacter[12]; // スプライトの数
-    const int WIDTH_SIZE  = 96;     // 一つのスプライトの幅
-    const int HEIGHT_SIZE = 64;     // 一つのスプライトの高さ
+    CCSpriteFrame* pSpritesCharacter[12]; // スプライトフレームの数
+    const int WIDTH_SIZE  = 96;      	  // 一つのスプライトの幅
+    const int HEIGHT_SIZE = 64;      	  // 一つのスプライトの高さ
     
     //「character.png」からスプライトフレームへの切り出し
     int i=0;
@@ -89,18 +89,54 @@ bool HelloWorld::init()
                         float(y * HEIGHT_SIZE), // Y座標
                         float(WIDTH_SIZE),      // 幅
                         float(HEIGHT_SIZE));    // 高さ
-            pSpritesCharacter[i++] = CCSprite::create("character.png", rect);
+            pSpritesCharacter[i++] = CCSpriteFrame::create("character.png", rect);
         }
     }
     
-     // 座標を確定して、シーンに追加
-     for (int i=0; i<12; i++)
-     {
-         int x = 50;
-         int y = 50;
-         pSpritesCharacter[i]->setPosition(ccp(x + (i * 50), y + (i * 50)));
-         this->addChild(pSpritesCharacter[i]);
-     }
+    CCAnimation *pAnimationFront = CCAnimation::create();
+    CCAnimation *pAnimationBack  = CCAnimation::create();
+    CCAnimation *pAnimationLeft  = CCAnimation::create();
+    CCAnimation *pAnimationRight = CCAnimation::create();
+    
+    pAnimationFront->addSpriteFrame(pSpritesCharacter[1]);
+    pAnimationFront->addSpriteFrame(pSpritesCharacter[2]);
+    
+    pAnimationBack->addSpriteFrame(pSpritesCharacter[7]);
+    pAnimationBack->addSpriteFrame(pSpritesCharacter[8]);
+    
+    pAnimationLeft->addSpriteFrame(pSpritesCharacter[10]);
+    pAnimationLeft->addSpriteFrame(pSpritesCharacter[11]);
+    
+    pAnimationRight->addSpriteFrame(pSpritesCharacter[4]);
+    pAnimationRight->addSpriteFrame(pSpritesCharacter[5]);
+    
+    pAnimationFront->setDelayPerUnit(0.5f);
+    pAnimationBack->setDelayPerUnit(0.5f);
+    pAnimationLeft->setDelayPerUnit(0.5f);
+    pAnimationRight->setDelayPerUnit(0.5f);
+    
+    CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
+    pAnimationCache->addAnimation( pAnimationFront, "FRONT" );
+    pAnimationCache->addAnimation( pAnimationBack,  "BACK" );
+    pAnimationCache->addAnimation( pAnimationLeft,  "LEFT" );
+    pAnimationCache->addAnimation( pAnimationRight, "RIGHT" );
+    
+    CCAnimation *pAnimation = pAnimationCache->animationByName("FRONT");
+    
+    // フレームアニメーションを繰り返す
+    CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation) );
+    
+    // add "HelloWorld" splash screen"
+    CCSprite* pPlayer= CCSprite::create();
+    
+    // 主人公は常に中心
+    pPlayer->setPosition( ccp(size.width/2, size.height/2));
+    
+    // add the sprite as a child to this layer
+    this->addChild(pPlayer, 0);
+    
+    // アニメーションを実行
+    pPlayer->runAction(pAction);
     
     return true;
 }
