@@ -10,7 +10,6 @@
 		A6B2B05317E40489006DE3C6 /* desert.tmx in Resources */ = {isa = PBXBuildFile; fileRef = A6B2B05017E40489006DE3C6 /* desert.tmx */; };
 		A6B2B05417E40489006DE3C6 /* desert.tsx in Resources */ = {isa = PBXBuildFile; fileRef = A6B2B05117E40489006DE3C6 /* desert.tsx */; };
 		A6B2B05517E40489006DE3C6 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = A6B2B05217E40489006DE3C6 /* tmw_desert_spacing.png */; };
-		A6B2B05717E406BB006DE3C6 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = A6B2B05617E406BB006DE3C6 /* character.png */; };
 		A6D9887517E3FE5A00A9F54F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D9887417E3FE5A00A9F54F /* QuartzCore.framework */; };
 		A6D9887717E3FE5A00A9F54F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D9887617E3FE5A00A9F54F /* OpenGLES.framework */; };
 		A6D9887917E3FE5A00A9F54F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D9887817E3FE5A00A9F54F /* OpenAL.framework */; };
@@ -284,13 +283,15 @@
 		A6D98C1217E3FE5E00A9F54F /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D98C1117E3FE5E00A9F54F /* libwebsockets.a */; };
 		A6D98C1817E3FE5E00A9F54F /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6D98C1717E3FE5E00A9F54F /* AppDelegate.cpp */; };
 		A6D98C1B17E3FE5E00A9F54F /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6D98C1A17E3FE5E00A9F54F /* HelloWorldScene.cpp */; };
+		A6DD46D717E5B33C008051C5 /* char_boss.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DD46D417E5B33C008051C5 /* char_boss.png */; };
+		A6DD46D817E5B33C008051C5 /* char_henchman.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DD46D517E5B33C008051C5 /* char_henchman.png */; };
+		A6DD46D917E5B33C008051C5 /* char_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DD46D617E5B33C008051C5 /* char_hero.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A6B2B05017E40489006DE3C6 /* desert.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tmx; path = Resources/desert.tmx; sourceTree = "<group>"; };
 		A6B2B05117E40489006DE3C6 /* desert.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tsx; path = Resources/desert.tsx; sourceTree = "<group>"; };
 		A6B2B05217E40489006DE3C6 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tmw_desert_spacing.png; path = Resources/tmw_desert_spacing.png; sourceTree = "<group>"; };
-		A6B2B05617E406BB006DE3C6 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = character.png; path = Resources/character.png; sourceTree = "<group>"; };
 		A6D9887117E3FE5A00A9F54F /* RPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6D9887417E3FE5A00A9F54F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A6D9887617E3FE5A00A9F54F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -881,6 +882,9 @@
 		A6D98C1717E3FE5E00A9F54F /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		A6D98C1917E3FE5E00A9F54F /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		A6D98C1A17E3FE5E00A9F54F /* HelloWorldScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
+		A6DD46D417E5B33C008051C5 /* char_boss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = char_boss.png; path = Resources/char_boss.png; sourceTree = "<group>"; };
+		A6DD46D517E5B33C008051C5 /* char_henchman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = char_henchman.png; path = Resources/char_henchman.png; sourceTree = "<group>"; };
+		A6DD46D617E5B33C008051C5 /* char_hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = char_hero.png; path = Resources/char_hero.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -952,7 +956,9 @@
 		A6D9888517E3FE5A00A9F54F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A6B2B05617E406BB006DE3C6 /* character.png */,
+				A6DD46D417E5B33C008051C5 /* char_boss.png */,
+				A6DD46D517E5B33C008051C5 /* char_henchman.png */,
+				A6DD46D617E5B33C008051C5 /* char_hero.png */,
 				A6B2B05017E40489006DE3C6 /* desert.tmx */,
 				A6B2B05117E40489006DE3C6 /* desert.tsx */,
 				A6B2B05217E40489006DE3C6 /* tmw_desert_spacing.png */,
@@ -2179,7 +2185,9 @@
 				A6B2B05317E40489006DE3C6 /* desert.tmx in Resources */,
 				A6B2B05417E40489006DE3C6 /* desert.tsx in Resources */,
 				A6B2B05517E40489006DE3C6 /* tmw_desert_spacing.png in Resources */,
-				A6B2B05717E406BB006DE3C6 /* character.png in Resources */,
+				A6DD46D717E5B33C008051C5 /* char_boss.png in Resources */,
+				A6DD46D817E5B33C008051C5 /* char_henchman.png in Resources */,
+				A6DD46D917E5B33C008051C5 /* char_hero.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

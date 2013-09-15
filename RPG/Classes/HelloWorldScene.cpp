@@ -82,7 +82,7 @@ bool HelloWorld::init()
                         float(y*Y_SIZE), // Y座標
                         float(X_SIZE),   // 幅
                         float(Y_SIZE));  // 高さ
-            pSpritesCharacter[ix] = CCSpriteFrame::create("character.png", rect);
+            pSpritesCharacter[ix] = CCSpriteFrame::create("char_hero.png", rect);
             ix++;
         }
     }
@@ -305,9 +305,7 @@ void HelloWorld::update(float delta)
 {
     CCLOG("update %f",delta);
     CCTMXTiledMap* pTileMap = (CCTMXTiledMap*)this->getChildByTag(TAG_MAP);
-    
-    CCSize screensize = CCDirector::sharedDirector()->getWinSize();
-    
+        
     CCPoint newTilemapPoint;
     newTilemapPoint = pTileMap->getPosition();
     
