@@ -52,7 +52,7 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
     CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Thonburi", 34);
-    
+
     // ask director the window size
     CCSize size = CCDirector::sharedDirector()->getWinSize();
     
@@ -76,13 +76,13 @@ bool HelloWorld::init()
     
     // NPCA表示
     pNpcA = Human::create("char_boss.png");
-    pNpcA->setPosition(ccp(size.width/2 + 100, size.height/2));
+    pNpcA->setPosition(ccp(size.width/2 - 100, size.height/2));
     pNpcA->addParent(this);
     
     // NPCBを表示
     pNpcB = Human::create("char_henchman.png");
+    pNpcB->setPosition(ccp(size.width/2 + 100, size.height/2));
     pNpcB->addParent(this);
-    pNpcB->setPosition(ccp(size.width/2 - 100, size.height/2));
     
     // タッチイベント有効
     this->setTouchMode(kCCTouchesOneByOne);
@@ -94,14 +94,12 @@ bool HelloWorld::init()
 bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
     CCLOG("ccTouchBegan");
-
     return true;
 }
 
 void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 {
     CCLOG("ccTouchEnded");
-    this->unschedule(schedule_selector(HelloWorld::update));
 }
 
 void HelloWorld::ccTouchMoved(CCTouch *pTouch, cocos2d::CCEvent *pEvent)
@@ -117,33 +115,6 @@ void HelloWorld::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent)
 void HelloWorld::update(float delta)
 {
     CCLOG("update %f",delta);
-#if 0
-    CCTMXTiledMap* pTileMap = (CCTMXTiledMap*)this->getChildByTag(TAG_MAP);
-        
-    CCPoint newTilemapPoint;
-    newTilemapPoint = pTileMap->getPosition();
-    
-    switch (PlayerDirectcion) {
-        case 2:
-            newTilemapPoint.y -= 32;
-            break;
-        case 1:
-            newTilemapPoint.y += 32;
-            break;
-        case 3:
-            newTilemapPoint.x += 32;
-            break;
-        case 4:
-            newTilemapPoint.x -= 32;
-            break;
-        default:
-            break;
-    }
-    
-    CCMoveTo* actionMove = CCMoveTo::create(0.1f, newTilemapPoint);
-    pTileMap->stopAllActions();
-    pTileMap->runAction(actionMove);
-#endif
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)

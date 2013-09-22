@@ -41,23 +41,27 @@ bool Human::initWithFile(const char *pFileName)
         }
     }
     
+    //前向き画像
     pAnimationFront = CCAnimation::create();
-    pAnimationBack  = CCAnimation::create();
-    pAnimationLeft  = CCAnimation::create();
-    pAnimationRight = CCAnimation::create();
-    
     pAnimationFront->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(1));
     pAnimationFront->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(2));
     
+    //後ろ向き画像
+    pAnimationBack = CCAnimation::create();
     pAnimationBack->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(7));
     pAnimationBack->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(8));
     
+    //左向き画像
+    pAnimationLeft = CCAnimation::create();
     pAnimationLeft->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(10));
     pAnimationLeft->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(11));
     
+    //右向き画像
+    pAnimationRight = CCAnimation::create();
     pAnimationRight->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(4));
     pAnimationRight->addSpriteFrame((CCSpriteFrame*)pSpriteFrameArray->objectAtIndex(5));
     
+    // アニメーションの切り替え周期
     pAnimationFront->setDelayPerUnit(0.5f);
     pAnimationBack->setDelayPerUnit(0.5f);
     pAnimationLeft->setDelayPerUnit(0.5f);
@@ -73,6 +77,9 @@ bool Human::initWithFile(const char *pFileName)
     pAnimationCache->addAnimation( pAnimationBack,  "BACK" );
     pAnimationCache->addAnimation( pAnimationLeft,  "LEFT" );
     pAnimationCache->addAnimation( pAnimationRight, "RIGHT" );
+
+    // add "HelloWorld" splash screen"
+    pSprite = CCSprite::create();
     
     return true;
 }
@@ -82,9 +89,6 @@ void Human::addParent(cocos2d::CCNode *pParent)
 {
     // キャラクターアニメーション設定
     CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
-
-    // add "HelloWorld" splash screen"
-    pSprite= CCSprite::create();
     
     // add the sprite as a child to this layer
     pParent->addChild(pSprite, 0);
@@ -97,3 +101,10 @@ void Human::addParent(cocos2d::CCNode *pParent)
     // アニメーションを実行
     pSprite->runAction(pAction);
 }
+
+// 座標指定
+void Human::setPosition(const CCPoint& pos)
+{
+    pSprite->setPosition(pos);
+}
+

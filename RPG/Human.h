@@ -23,6 +23,9 @@ public:
     // 親ノードにaddCheilする
     void addParent(cocos2d::CCNode *pParent);
     
+    // 座標指定
+    void setPosition(const cocos2d::CCPoint& pos);
+    
 private:
     // プレイヤー向き
     const int PLAYER_FRONT = 1;
