@@ -2,6 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "Human.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -20,33 +21,20 @@ public:
     ================================================*/
     // マップのタグ
     const int TAG_MAP = 10;
-    
-    // プレイヤー向き
-    const int PLAYER_FRONT = 1;
-    const int PLAYER_BACK  = 2;
-    const int PLAYER_LEFT  = 3;
-    const int PLAYER_RIGHT = 4;
 
     /*================================================
                             変数
     ================================================*/
-    // プレイヤーの向き管理
-    int PlayerDirectcion = PLAYER_FRONT;
+    // 主人公
+    Human* pHero;
 
-    // プレイヤーのスプライト管理
-    cocos2d::CCSprite *pPlayer;
-    
-    // プレイヤーのアニメーション管理
-    cocos2d::CCAnimation *pAnimation;
-
-    // 座標管理
-    cocos2d::CCPoint m_StartPoint;
-    cocos2d::CCPoint m_Delta;
+    // NPC
+    Human* pNpcA;
+    Human* pNpcB;
     
     /*================================================
                           メソッド
     ================================================*/
-    
     // タッチイベントメソッド
     bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     void ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);

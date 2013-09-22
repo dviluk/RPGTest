@@ -68,74 +68,21 @@ bool HelloWorld::init()
     CCTMXTiledMap* pTileMap = CCTMXTiledMap::create("desert.tmx");
     this->addChild(pTileMap);
     pTileMap->setTag(TAG_MAP);
+
+    // 主人公表示
+    pHero = Human::create("char_hero.png");
+    pHero->setPosition(ccp(size.width/2, size.height/2));
+    pHero->addParent(this);
     
-    // キャラクターアニメーション設定
-    CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
-    CCSpriteFrame* pSpritesCharacter[12];     // 12個分のスプライトの配列を用意する
-    const int X_SIZE = 96;// ピースの横幅
-    const int Y_SIZE = 64;// ピースの縦幅
+    // NPCA表示
+    pNpcA = Human::create("char_boss.png");
+    pNpcA->setPosition(ccp(size.width/2 + 100, size.height/2));
+    pNpcA->addParent(this);
     
-    int ix=0;
-    for (int y=0;y<4; y++) {
-        for (int x=0;x<3; x++) {
-            CCRect rect(float(x*X_SIZE), // X座標
-                        float(y*Y_SIZE), // Y座標
-                        float(X_SIZE),   // 幅
-                        float(Y_SIZE));  // 高さ
-            pSpritesCharacter[ix] = CCSpriteFrame::create("char_hero.png", rect);
-            ix++;
-        }
-    }
-    
-    CCAnimation *pAnimationFront = CCAnimation::create();
-    CCAnimation *pAnimationBack  = CCAnimation::create();
-    CCAnimation *pAnimationLeft  = CCAnimation::create();
-    CCAnimation *pAnimationRight = CCAnimation::create();
-    
-    pAnimationFront->addSpriteFrame(pSpritesCharacter[1]);
-    pAnimationFront->addSpriteFrame(pSpritesCharacter[2]);
-    
-    pAnimationBack->addSpriteFrame(pSpritesCharacter[7]);
-    pAnimationBack->addSpriteFrame(pSpritesCharacter[8]);
-    
-    pAnimationLeft->addSpriteFrame(pSpritesCharacter[10]);
-    pAnimationLeft->addSpriteFrame(pSpritesCharacter[11]);
-    
-    pAnimationRight->addSpriteFrame(pSpritesCharacter[4]);
-    pAnimationRight->addSpriteFrame(pSpritesCharacter[5]);
-    
-    pAnimationFront->setDelayPerUnit(0.5f);
-    pAnimationBack->setDelayPerUnit(0.5f);
-    pAnimationLeft->setDelayPerUnit(0.5f);
-    pAnimationRight->setDelayPerUnit(0.5f);
-    
-    // 全フレーム表示後は１フレームに戻る
-    pAnimationFront->setRestoreOriginalFrame(true);
-    pAnimationBack->setRestoreOriginalFrame(true);
-    pAnimationLeft->setRestoreOriginalFrame(true);
-    pAnimationRight->setRestoreOriginalFrame(true);
-    
-    pAnimationCache->addAnimation( pAnimationFront, "FRONT" );
-    pAnimationCache->addAnimation( pAnimationBack,  "BACK" );
-    pAnimationCache->addAnimation( pAnimationLeft,  "LEFT" );
-    pAnimationCache->addAnimation( pAnimationRight, "RIGHT" );
-    
-    CCAnimation *pAnimation = pAnimationCache->animationByName("FRONT");
-    
-    // フレームアニメーションを繰り返す
-    CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation) );
-    
-    // add "HelloWorld" splash screen"
-    pPlayer= CCSprite::create();
-    
-    // 主人公は常に中心
-    pPlayer->setPosition( ccp(size.width/2, size.height/2));
-    
-    // add the sprite as a child to this layer
-    this->addChild(pPlayer, 0);
-    
-    // アニメーションを実行
-    pPlayer->runAction(pAction);
+    // NPCBを表示
+    pNpcB = Human::create("char_henchman.png");
+    pNpcB->addParent(this);
+    pNpcB->setPosition(ccp(size.width/2 - 100, size.height/2));
     
     // タッチイベント有効
     this->setTouchMode(kCCTouchesOneByOne);
@@ -147,141 +94,7 @@ bool HelloWorld::init()
 bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
     CCLOG("ccTouchBegan");
-    
-    CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
-    CCTMXTiledMap* pTileMap = (CCTMXTiledMap*)this->getChildByTag(TAG_MAP);
-    
-    CCPoint charePoint;
-    CCPoint abPoint;
-    CCPoint tileLocation = pTileMap->getPosition();
-    CCPoint point = pTouch->getLocationInView();
-    CCLOG("タッチ座標(画面のピクセル) %f,%f",point.x, point.y);
-    CCLOG("タイルロケーション(タイルマップの左下位置) %f,%f",tileLocation.x, tileLocation.y);
-    
-    CCSize screensize = CCDirector::sharedDirector()->getWinSize();
-    CCPoint touchPoint = ccp(point.x, screensize.height - point.y);
-    
-    abPoint.x =  - tileLocation.x  + touchPoint.x;
-    abPoint.y =  - tileLocation.y  + touchPoint.y;
-    
-    CCSize tileSize = pTileMap->getTileSize();
-    
-    int unit_x = (int)(abPoint.x/tileSize.width);
-    int unit_y = (int)(abPoint.y/tileSize.height);
-    
-    CCLOG("タイル位置(タッチしたタイルマップの位置) %d,%d",unit_x, unit_y);
-    CCLOG("タイルサイズ(1タイル分) %f,%f",tileSize.width, tileSize.height);
-    
-    // どの方向に移動するか
-    // 中心座標から、タッチ座標の距離を算出
-    charePoint.x = screensize.width/2;
-    charePoint.y = screensize.height/2;
-    
-    int xdiff = touchPoint.x - charePoint.x;
-    int ydiff = touchPoint.y - charePoint.y;
-    
-    int abs_x = abs(xdiff);
-    int abx_y = abs(ydiff);
-    
-    if (xdiff < 0)
-    {
-        if (ydiff < 0)
-        {
-            if (abx_y < abs_x)
-            {
-                CCLOG("左向き");
-                pAnimation = pAnimationCache->animationByName("LEFT");
-                PlayerDirectcion = PLAYER_LEFT;
-            }
-            else
-            {
-                CCLOG("下向き");
-                pAnimation = pAnimationCache->animationByName("FRONT");
-                PlayerDirectcion = PLAYER_FRONT;
-            }
-            
-        }
-        else
-        {
-            if (abx_y < abs_x)
-            {
-                CCLOG("左向き");
-                pAnimation = pAnimationCache->animationByName("LEFT");
-                PlayerDirectcion = PLAYER_LEFT;
-                
-            }
-            else
-            {
-                CCLOG("上向き");
-                pAnimation = pAnimationCache->animationByName("BACK");
-                PlayerDirectcion = PLAYER_BACK;
-            }
-        }
-        
-    }
-    else
-    {
-        if (ydiff < 0)
-        {
-            if (abx_y < abs_x)
-            {
-                CCLOG("右向き");
-                pAnimation = pAnimationCache->animationByName("RIGHT");
-                PlayerDirectcion = PLAYER_RIGHT;
-                
-            }
-            else
-            {
-                CCLOG("下向き");
-                pAnimation = pAnimationCache->animationByName("FRONT");
-                PlayerDirectcion = PLAYER_FRONT;
-            }
-            
-        }
-        else
-        {
-            if (abx_y < abs_x)
-            {
-                CCLOG("右向き");
-                pAnimation = pAnimationCache->animationByName("RIGHT");
-                PlayerDirectcion = PLAYER_RIGHT;
-            }
-            else
-            {
-                CCLOG("上向き");
-                pAnimation = pAnimationCache->animationByName("BACK");
-                PlayerDirectcion = PLAYER_BACK;
-            }
-        }
-    }
-    
-    // アニメーションを実行
-    pPlayer->stopAllActions();
-    this->schedule(schedule_selector(HelloWorld::update), 0.11f);
-    
-    CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation));
-    pPlayer->runAction(pAction);
-    
-    CCPoint newTilemapPoint;
-    newTilemapPoint = pTileMap->getPosition();
-    
-    switch (PlayerDirectcion) {
-        case 2:
-            newTilemapPoint.y -= 32;
-            break;
-        case 1:
-            newTilemapPoint.y += 32;
-            break;
-        case 3:
-            newTilemapPoint.x += 32;
-            break;
-        case 4:
-            newTilemapPoint.x -= 32;
-            break;
-        default:
-            break;
-    }
-    
+
     return true;
 }
 
@@ -304,6 +117,7 @@ void HelloWorld::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent)
 void HelloWorld::update(float delta)
 {
     CCLOG("update %f",delta);
+#if 0
     CCTMXTiledMap* pTileMap = (CCTMXTiledMap*)this->getChildByTag(TAG_MAP);
         
     CCPoint newTilemapPoint;
@@ -329,6 +143,7 @@ void HelloWorld::update(float delta)
     CCMoveTo* actionMove = CCMoveTo::create(0.1f, newTilemapPoint);
     pTileMap->stopAllActions();
     pTileMap->runAction(actionMove);
+#endif
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
