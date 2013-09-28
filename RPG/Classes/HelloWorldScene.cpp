@@ -72,17 +72,20 @@ bool HelloWorld::init()
     // 主人公表示
     pHero = Human::create("char_hero.png");
     pHero->setPosition(ccp(size.width/2, size.height/2));
-    pHero->addParent(this);
+    pHero->addParent(this,10);
     
     // NPCA表示
     pNpcA = Human::create("char_boss.png");
     pNpcA->setPosition(ccp(size.width/2 - 100, size.height/2));
-    pNpcA->addParent(this);
+    pNpcA->addParent(this,11);
     
     // NPCBを表示
     pNpcB = Human::create("char_henchman.png");
     pNpcB->setPosition(ccp(size.width/2 + 100, size.height/2));
-    pNpcB->addParent(this);
+    pNpcB->addParent(this,12);
+    
+    pNpcB->walkAround(this, true);
+    // this->schedule(schedule_selector(Human::walkRamdom), 3.0);
     
     // タッチイベント有効
     this->setTouchMode(kCCTouchesOneByOne);

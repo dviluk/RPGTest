@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 
-class Human : public cocos2d::CCNode
+class Human
 {
 public:
     // 生成メソッド
@@ -21,10 +21,15 @@ public:
     bool initWithFile(const char *pFileName);
     
     // 親ノードにaddCheilする
-    void addParent(cocos2d::CCNode *pParent);
+    void addParent(cocos2d::CCNode *pParent, int iTag);
     
     // 座標指定
     void setPosition(const cocos2d::CCPoint& pos);
+    
+    // 歩き回る
+    void walkAround(cocos2d::CCNode* parent, bool flag);
+    
+    void walkRamdom(void);
     
 private:
     // プレイヤー向き
@@ -36,12 +41,16 @@ private:
      // ピースの横幅/縦幅
     const int X_SIZE = 96;
     const int Y_SIZE = 64;
-    
+        
     // プレイヤーの向き管理
     int PlayerDirectcion = PLAYER_FRONT;
     
     // テクスチャ(前後左右の歩きパターン)
     cocos2d::CCSprite* pSprite;
+    
+    cocos2d::CCLayer* pLayer;
+    
+    int tag;
     
     // 前後左右のアニメーション格納する
     cocos2d::CCAnimation* pAnimationFront;
@@ -51,6 +60,21 @@ private:
     
     // スプライトフレーム格納用
     cocos2d::CCArray* pSpriteFrameArray;
+    
+    // キャラクタの座標
+    cocos2d::CCPoint Point;
+
+    // 前に移動する
+    void walkFront(int step);
+    
+    // 後ろに移動する
+    void walkBack(int step);
+    
+    // 左に移動する
+    void walkLeft(int step);
+    
+    // 右に移動する
+    void walkRight(int step);
 };
 
 #endif /* defined(__RPG__Human__) */
