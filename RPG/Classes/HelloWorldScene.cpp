@@ -70,6 +70,8 @@ bool HelloWorld::init()
     pTileMap->setTag(TAG_MAP);
 
     // 主人公表示
+    
+    CCLOG("[%p]HelloWorld::init",this);
     pHero = Human::create("char_hero.png");
     pHero->setPosition(ccp(size.width/2, size.height/2));
     pHero->addParent(this,10);
@@ -85,7 +87,6 @@ bool HelloWorld::init()
     pNpcB->addParent(this,12);
     
     pNpcB->walkAround(this, true);
-    // this->schedule(schedule_selector(Human::walkRamdom), 3.0);
     
     // タッチイベント有効
     this->setTouchMode(kCCTouchesOneByOne);

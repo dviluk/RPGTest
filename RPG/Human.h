@@ -48,7 +48,7 @@ private:
     // テクスチャ(前後左右の歩きパターン)
     cocos2d::CCSprite* pSprite;
     
-    cocos2d::CCLayer* pLayer;
+    cocos2d::CCLayer* pParent;
     
     int tag;
     
@@ -65,16 +65,16 @@ private:
     cocos2d::CCPoint Point;
 
     // 前に移動する
-    void walkFront(int step);
+    void walkFront(void);
     
     // 後ろに移動する
-    void walkBack(int step);
+    void walkBack(void);
     
     // 左に移動する
-    void walkLeft(int step);
+    void walkLeft(void);
     
     // 右に移動する
-    void walkRight(int step);
+    void walkRight(void);
 };
 
 #endif /* defined(__RPG__Human__) */

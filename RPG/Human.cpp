@@ -78,21 +78,23 @@ bool Human::initWithFile(const char *pFileName)
 
     // add "HelloWorld" splash screen"
     pSprite = CCSprite::create();
-    pSprite->retain();
+    CCLOG("[%p]initWithFile %p:",this, pSprite);
+
     return true;
 }
 
 // 親ノードにaddCheildする
 void Human::addParent(cocos2d::CCNode *pParent, int iTag)
 {
-    pLayer = (CCLayer*)pParent;
+    pParent = (CCLayer*)pParent;
     
     // キャラクターアニメーション設定
     CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
     
     // add the sprite as a child to this layer
     pParent->addChild(pSprite, 0);
-    
+    CCLOG("[%p]addParent %p",this,pSprite);
+
     tag = iTag;
     pSprite->setTag(iTag);
     
@@ -103,6 +105,7 @@ void Human::addParent(cocos2d::CCNode *pParent, int iTag)
     
     // アニメーションを実行
     pSprite->runAction(pAction);
+    
 }
 
 // 座標指定
@@ -110,6 +113,8 @@ void Human::setPosition(const CCPoint& pos)
 {
     pSprite->setPosition(pos);
     Point = (CCPoint)pos;
+    CCLOG("[%p]setPosition %p",this,pSprite);
+
 }
 
 // 歩き回る
@@ -130,22 +135,25 @@ void Human::walkAround(CCNode* parent,  bool flag)
 
 void Human::walkRamdom(void)
 {
+    CCLOG("[%p]walkRamdom:pSprite %p",this,pSprite);
+    CCLOG("[%p]walkRamdom:tag %d",this,tag);
+    
     srand((unsigned int)time(NULL));
     int randNum=rand()%4;
     
     switch (randNum)
     {
         case 0:
-            walkFront(0);
+            walkFront();
             break;
         case 1:
-            walkBack(0);
+            walkBack();
             break;
         case 2:
-            walkLeft(0);
+            walkLeft();
             break;
         case 3:
-            walkRight(0);
+            walkRight();
             break;
         default:
             break;
@@ -154,58 +162,76 @@ void Human::walkRamdom(void)
 }
 
 // 前に移動する
-void Human::walkFront(int step)
+void Human::walkFront(void)
 {
+    CCSprite* pSprite = (CCSprite*)((CCLayer*)this)->getChildByTag(12);
+    CCLOG("[%p]walkFront:pSprite %p",this,pSprite);
+    
+    CCPoint Point = pSprite->getPosition();
     Point.y -= 32;
 
     CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
     CCAnimation *pAnimation = pAnimationCache->animationByName("FRONT");
     CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation));
+
+    pSprite->stopAllActions();
     pSprite->runAction(pAction);
     
-    CCMoveTo* actionMove = CCMoveTo::create(1.0f, Point);
+    CCMoveTo* actionMove = CCMoveTo::create(0.5f, Point);
     pSprite->runAction(actionMove);
 }
 
 // 後ろに移動する
-void Human::walkBack(int step)
+void Human::walkBack(void)
 {
-    Point.y -= 32;
+    CCSprite* pSprite = (CCSprite*)((CCLayer*)this)->getChildByTag(12);
+    CCLOG("[%p]walkBack:pSprite %p",this,pSprite);
+    CCPoint Point = pSprite->getPosition();
+    Point.y += 32;
 
     CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
     CCAnimation *pAnimation = pAnimationCache->animationByName("BACK");
     CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation));
+    pSprite->stopAllActions();
     pSprite->runAction(pAction);
     
-    CCMoveTo* actionMove = CCMoveTo::create(1.0f, Point);
+    CCMoveTo* actionMove = CCMoveTo::create(0.5f, Point);
     pSprite->runAction(actionMove);
 }
 
 // 左に移動する
-void Human::walkLeft(int step)
+void Human::walkLeft(void)
 {
-    Point.y -= 32;
+    CCSprite* pSprite = (CCSprite*)((CCLayer*)this)->getChildByTag(12);
+    CCLOG("[%p]walkLeft:pSprite %p",this,pSprite);
+    CCPoint Point = pSprite->getPosition();
+    Point.x -= 32;
 
     CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
     CCAnimation *pAnimation = pAnimationCache->animationByName("LEFT");
     CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation));
+    pSprite->stopAllActions();
     pSprite->runAction(pAction);
     
-    CCMoveTo* actionMove = CCMoveTo::create(1.0f, Point);
+    CCMoveTo* actionMove = CCMoveTo::create(0.5f, Point);
     pSprite->runAction(actionMove);
 }
 
 // 右に移動する
-void Human::walkRight(int step)
+void Human::walkRight(void)
 {
-    Point.y -= 32;
+    CCSprite* pSprite = (CCSprite*)((CCLayer*)this)->getChildByTag(12);
+    CCLOG("[%p]walkRight:pSprite %p",this,pSprite);
+    CCPoint Point = pSprite->getPosition();
+    Point.x += 32;
 
     CCAnimationCache *pAnimationCache = CCAnimationCache::sharedAnimationCache();
     CCAnimation *pAnimation = pAnimationCache->animationByName("RIGHT");
     CCRepeatForever *pAction = CCRepeatForever::create( CCAnimate::create(pAnimation));
+    pSprite->stopAllActions();
     pSprite->runAction(pAction);
     
-    CCMoveTo* actionMove = CCMoveTo::create(1.0f, Point);
+    CCMoveTo* actionMove = CCMoveTo::create(5.5f, Point);
     pSprite->runAction(actionMove);
 }
 
