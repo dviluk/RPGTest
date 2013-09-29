@@ -11,11 +11,11 @@
 
 #include "cocos2d.h"
 
-class Human
+class Human : public cocos2d::CCNode
 {
 public:
     // 生成メソッド
-    static Human* create(const char *pFileName);
+    static Human* create(const char *pszFileName, const char* name);
 
     // 初期化メソッド(cretaメソッド経由でコールする)
     bool initWithFile(const char *pFileName);
@@ -29,7 +29,9 @@ public:
     // 歩き回る
     void walkAround(cocos2d::CCNode* parent, bool flag);
     
-    void walkRamdom(void);
+    // 歩き周期
+    void walkCycli(float cycle);
+    
     
 private:
     // プレイヤー向き
@@ -41,6 +43,8 @@ private:
      // ピースの横幅/縦幅
     const int X_SIZE = 96;
     const int Y_SIZE = 64;
+    
+    float m_cycle;
         
     // プレイヤーの向き管理
     int PlayerDirectcion = PLAYER_FRONT;
@@ -49,6 +53,8 @@ private:
     cocos2d::CCSprite* pSprite;
     
     cocos2d::CCLayer* pParent;
+    
+    cocos2d::CCString* m_name;
     
     int tag;
     
@@ -64,6 +70,12 @@ private:
     // キャラクタの座標
     cocos2d::CCPoint Point;
 
+    // 名前を設定する
+    void setName(const char* name);
+
+    // 歩く方向を決定
+    void walkRamdom(void);
+    
     // 前に移動する
     void walkFront(void);
     

@@ -31,6 +31,12 @@ public:
     // NPC
     Human* pNpcA;
     Human* pNpcB;
+    Human* pNpcC;
+    Human* pNpcD;
+    Human* pNpcE;
+    Human* pNpcF;
+    Human* pNpcG;
+    Human* pNpcH;
     
     /*================================================
                           メソッド

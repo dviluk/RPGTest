@@ -72,21 +72,79 @@ bool HelloWorld::init()
     // 主人公表示
     
     CCLOG("[%p]HelloWorld::init",this);
-    pHero = Human::create("char_hero.png");
+    pHero = Human::create("char_hero.png", "HERO");
     pHero->setPosition(ccp(size.width/2, size.height/2));
-    pHero->addParent(this,10);
+    pHero->addParent(this,100);
+    pHero->walkCycli(1.1);
+    this->addChild(pHero);
     
     // NPCA表示
-    pNpcA = Human::create("char_boss.png");
+    pNpcA = Human::create("char_boss.png", "NPCA");
     pNpcA->setPosition(ccp(size.width/2 - 100, size.height/2));
-    pNpcA->addParent(this,11);
+    pNpcA->addParent(this,101);
+    pNpcA->walkCycli(0.9);
+    this->addChild(pNpcA);
     
     // NPCBを表示
-    pNpcB = Human::create("char_henchman.png");
+    pNpcB = Human::create("char_henchman.png", "NPCB");
     pNpcB->setPosition(ccp(size.width/2 + 100, size.height/2));
-    pNpcB->addParent(this,12);
+    pNpcB->addParent(this,102);
+    pNpcB->walkCycli(1.2);
+    this->addChild(pNpcB);
+
+    // NPCCを表示
+    pNpcC = Human::create("char_henchman.png", "NPCC");
+    pNpcC->setPosition(ccp(size.width/2, size.height/2 + 100) );
+    pNpcC->addParent(this,102);
+    pNpcC->walkCycli(1.5);
+    this->addChild(pNpcC);
+
+    // NPCDを表示
+    pNpcD = Human::create("char_henchman.png", "NPCD");
+    pNpcD->setPosition(ccp(size.width/2 + 100, size.height/2 + 100));
+    pNpcD->addParent(this,102);
+    pNpcD->walkCycli(0.6);
+    this->addChild(pNpcD);
+
+    // NPCEを表示
+    pNpcE = Human::create("char_henchman.png", "NPCE");
+    pNpcE->setPosition(ccp(size.width/2 - 100, size.height/2 + 100) );
+    pNpcE->addParent(this,102);
+    pNpcE->walkCycli(0.87);
+    this->addChild(pNpcE);
+
+    // NPCFを表示
+    pNpcF = Human::create("char_henchman.png", "NPCF");
+    pNpcF->setPosition(ccp(size.width/2 , size.height/2 - 100) );
+    pNpcF->addParent(this,102);
+    pNpcF->walkCycli(1.87);
+    this->addChild(pNpcF);
     
+    // NPCGを表示
+    pNpcG = Human::create("char_henchman.png", "NPCG");
+    pNpcG->setPosition(ccp(size.width/2 + 100, size.height/2  - 100));
+    pNpcG->addParent(this,102);
+    pNpcG->walkCycli(0.97);
+    this->addChild(pNpcG);
+    
+    // NPCHを表示
+    pNpcH = Human::create("char_henchman.png", "NPCH");
+    pNpcH->setPosition(ccp(size.width/2 - 100, size.height/2 - 100) );
+    pNpcH->addParent(this,102);
+    pNpcH->walkCycli(1.27);
+    this->addChild(pNpcH);
+    
+    pHero->walkAround(this, true);
+    pNpcA->walkAround(this, true);
     pNpcB->walkAround(this, true);
+
+    pNpcC->walkAround(this, true);
+    pNpcD->walkAround(this, true);
+    pNpcE->walkAround(this, true);
+    
+    pNpcF->walkAround(this, true);
+    pNpcG->walkAround(this, true);
+    pNpcH->walkAround(this, true);
     
     // タッチイベント有効
     this->setTouchMode(kCCTouchesOneByOne);
