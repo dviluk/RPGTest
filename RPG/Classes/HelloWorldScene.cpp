@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "SneakyJoystickSkinnedBase.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -146,10 +147,29 @@ bool HelloWorld::init()
     pNpcG->walkAround(this, true);
     pNpcH->walkAround(this, true);
     
-    // タッチイベント有効
-    this->setTouchMode(kCCTouchesOneByOne);
-    this->setTouchEnabled(true);
-
+    // ジョイスティック設定
+    joystickbase = new SneakyJoystick();
+    joystickbase->initWithRect(CCRectMake(0, 0, 100.0f, 100.0f));
+    joystickbase->autorelease();
+    
+    skinjoystick = SneakyJoystickSkinnedBase::create();
+    skinjoystick->setBackgroundSprite(CCSprite::create("jyostric1.png"));  //ジョイスティックの背景
+    skinjoystick->setThumbSprite(CCSprite::create("jyostric2.png"));
+    skinjoystick->setJoystick(joystickbase);
+    skinjoystick->setPosition(ccp(150,150));
+    
+    //ヘッダーで    SneakyJoystick *joystickと定義をしてます。
+    joystick = skinjoystick->getJoystick();
+    joystick->setAutoCenter(true);
+    joystick->setHasDeadzone(true);
+    
+    //このようにデッドスペースの半径を設定します。
+    joystick->setDeadRadius(20.0f);
+ 
+    this->addChild(skinjoystick,9999);
+ 
+    this->scheduleUpdate();
+    
     return true;
 }
 
@@ -176,7 +196,11 @@ void HelloWorld::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent)
 
 void HelloWorld::update(float delta)
 {
-    CCLOG("update %f",delta);
+    
+    
+    CCPoint moveingPoint = joystick->getVelocity();
+
+    CCLOG("moveingPoint %f,%f",moveingPoint.x, moveingPoint.y);
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)

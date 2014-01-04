@@ -11,6 +11,12 @@
 		A6B2B05317E40489006DE3C6 /* desert.tmx in Resources */ = {isa = PBXBuildFile; fileRef = A6B2B05017E40489006DE3C6 /* desert.tmx */; };
 		A6B2B05417E40489006DE3C6 /* desert.tsx in Resources */ = {isa = PBXBuildFile; fileRef = A6B2B05117E40489006DE3C6 /* desert.tsx */; };
 		A6B2B05517E40489006DE3C6 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = A6B2B05217E40489006DE3C6 /* tmw_desert_spacing.png */; };
+		A6B9F7CC187842F00084CA7C /* SneakyButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6B9F7C2187842F00084CA7C /* SneakyButton.cpp */; };
+		A6B9F7CD187842F00084CA7C /* SneakyButtonSkinnedBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6B9F7C4187842F00084CA7C /* SneakyButtonSkinnedBase.cpp */; };
+		A6B9F7CE187842F00084CA7C /* SneakyJoystick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6B9F7C6187842F00084CA7C /* SneakyJoystick.cpp */; };
+		A6B9F7CF187842F00084CA7C /* SneakyJoystickSkinnedBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6B9F7C8187842F00084CA7C /* SneakyJoystickSkinnedBase.cpp */; };
+		A6B9F7D6187853AD0084CA7C /* jyostric2.png in Resources */ = {isa = PBXBuildFile; fileRef = A6B9F7D4187853AD0084CA7C /* jyostric2.png */; };
+		A6B9F7D7187853AD0084CA7C /* jyostric1.png in Resources */ = {isa = PBXBuildFile; fileRef = A6B9F7D5187853AD0084CA7C /* jyostric1.png */; };
 		A6D9887517E3FE5A00A9F54F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D9887417E3FE5A00A9F54F /* QuartzCore.framework */; };
 		A6D9887717E3FE5A00A9F54F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D9887617E3FE5A00A9F54F /* OpenGLES.framework */; };
 		A6D9887917E3FE5A00A9F54F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D9887817E3FE5A00A9F54F /* OpenAL.framework */; };
@@ -295,6 +301,16 @@
 		A6B2B05017E40489006DE3C6 /* desert.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tmx; path = Resources/desert.tmx; sourceTree = "<group>"; };
 		A6B2B05117E40489006DE3C6 /* desert.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tsx; path = Resources/desert.tsx; sourceTree = "<group>"; };
 		A6B2B05217E40489006DE3C6 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tmw_desert_spacing.png; path = Resources/tmw_desert_spacing.png; sourceTree = "<group>"; };
+		A6B9F7C2187842F00084CA7C /* SneakyButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SneakyButton.cpp; sourceTree = "<group>"; };
+		A6B9F7C3187842F00084CA7C /* SneakyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButton.h; sourceTree = "<group>"; };
+		A6B9F7C4187842F00084CA7C /* SneakyButtonSkinnedBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SneakyButtonSkinnedBase.cpp; sourceTree = "<group>"; };
+		A6B9F7C5187842F00084CA7C /* SneakyButtonSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButtonSkinnedBase.h; sourceTree = "<group>"; };
+		A6B9F7C6187842F00084CA7C /* SneakyJoystick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SneakyJoystick.cpp; sourceTree = "<group>"; };
+		A6B9F7C7187842F00084CA7C /* SneakyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystick.h; sourceTree = "<group>"; };
+		A6B9F7C8187842F00084CA7C /* SneakyJoystickSkinnedBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SneakyJoystickSkinnedBase.cpp; sourceTree = "<group>"; };
+		A6B9F7C9187842F00084CA7C /* SneakyJoystickSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedBase.h; sourceTree = "<group>"; };
+		A6B9F7D4187853AD0084CA7C /* jyostric2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jyostric2.png; path = Resources/jyostric2.png; sourceTree = "<group>"; };
+		A6B9F7D5187853AD0084CA7C /* jyostric1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jyostric1.png; path = Resources/jyostric1.png; sourceTree = "<group>"; };
 		A6D9887117E3FE5A00A9F54F /* RPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6D9887417E3FE5A00A9F54F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A6D9887617E3FE5A00A9F54F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -912,6 +928,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6B9F7BF187842F00084CA7C /* SneakyInput */ = {
+			isa = PBXGroup;
+			children = (
+				A6B9F7C2187842F00084CA7C /* SneakyButton.cpp */,
+				A6B9F7C3187842F00084CA7C /* SneakyButton.h */,
+				A6B9F7C4187842F00084CA7C /* SneakyButtonSkinnedBase.cpp */,
+				A6B9F7C5187842F00084CA7C /* SneakyButtonSkinnedBase.h */,
+				A6B9F7C6187842F00084CA7C /* SneakyJoystick.cpp */,
+				A6B9F7C7187842F00084CA7C /* SneakyJoystick.h */,
+				A6B9F7C8187842F00084CA7C /* SneakyJoystickSkinnedBase.cpp */,
+				A6B9F7C9187842F00084CA7C /* SneakyJoystickSkinnedBase.h */,
+			);
+			name = SneakyInput;
+			path = libs/SneakyInput;
+			sourceTree = "<group>";
+		};
 		A6D9886817E3FE5900A9F54F = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +991,8 @@
 		A6D9888517E3FE5A00A9F54F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A6B9F7D4187853AD0084CA7C /* jyostric2.png */,
+				A6B9F7D5187853AD0084CA7C /* jyostric1.png */,
 				A6DD46D417E5B33C008051C5 /* char_boss.png */,
 				A6DD46D517E5B33C008051C5 /* char_henchman.png */,
 				A6DD46D617E5B33C008051C5 /* char_hero.png */,
@@ -996,6 +1030,7 @@
 		A6D988A617E3FE5A00A9F54F /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				A6B9F7BF187842F00084CA7C /* SneakyInput */,
 				A6D988A717E3FE5A00A9F54F /* cocos2dx */,
 				A6D98A9717E3FE5D00A9F54F /* CocosDenshion */,
 				A6D98AAF17E3FE5D00A9F54F /* extensions */,
@@ -2182,6 +2217,7 @@
 				A6D9889117E3FE5A00A9F54F /* Icon-Small-50.png in Resources */,
 				A6D9889317E3FE5A00A9F54F /* Icon-Small.png in Resources */,
 				A6D9889517E3FE5A00A9F54F /* Icon-Small@2x.png in Resources */,
+				A6B9F7D7187853AD0084CA7C /* jyostric1.png in Resources */,
 				A6D9889717E3FE5A00A9F54F /* Icon.png in Resources */,
 				A6D9889917E3FE5A00A9F54F /* Icon@2x.png in Resources */,
 				A6D9889B17E3FE5A00A9F54F /* iTunesArtwork in Resources */,
@@ -2189,6 +2225,7 @@
 				A6D98AAE17E3FE5D00A9F54F /* project.pbxproj in Resources */,
 				A6B2B05317E40489006DE3C6 /* desert.tmx in Resources */,
 				A6B2B05417E40489006DE3C6 /* desert.tsx in Resources */,
+				A6B9F7D6187853AD0084CA7C /* jyostric2.png in Resources */,
 				A6B2B05517E40489006DE3C6 /* tmw_desert_spacing.png in Resources */,
 				A6DD46D717E5B33C008051C5 /* char_boss.png in Resources */,
 				A6DD46D817E5B33C008051C5 /* char_henchman.png in Resources */,
@@ -2211,6 +2248,7 @@
 				A6D988B017E3FE5A00A9F54F /* CCActionCatmullRom.cpp in Sources */,
 				A6D988B317E3FE5A00A9F54F /* CCActionEase.cpp in Sources */,
 				A6D988B617E3FE5A00A9F54F /* CCActionGrid.cpp in Sources */,
+				A6B9F7CF187842F00084CA7C /* SneakyJoystickSkinnedBase.cpp in Sources */,
 				A6D988B917E3FE5A00A9F54F /* CCActionGrid3D.cpp in Sources */,
 				A6D988BC17E3FE5A00A9F54F /* CCActionInstant.cpp in Sources */,
 				A6D988BF17E3FE5A00A9F54F /* CCActionInterval.cpp in Sources */,
@@ -2305,6 +2343,7 @@
 				A6D98A1D17E3FE5C00A9F54F /* CCSpriteBatchNode.cpp in Sources */,
 				A6D98A2017E3FE5C00A9F54F /* CCSpriteFrame.cpp in Sources */,
 				A6D98A2317E3FE5C00A9F54F /* CCSpriteFrameCache.cpp in Sources */,
+				A6B9F7CD187842F00084CA7C /* SneakyButtonSkinnedBase.cpp in Sources */,
 				A6D98A2717E3FE5C00A9F54F /* base64.cpp in Sources */,
 				A6D98A2A17E3FE5C00A9F54F /* CCNotificationCenter.cpp in Sources */,
 				A6D98A2D17E3FE5C00A9F54F /* CCPointExtension.cpp in Sources */,
@@ -2365,6 +2404,7 @@
 				A6D98AEF17E3FE5D00A9F54F /* CCNodeLoader.cpp in Sources */,
 				A6D98AF217E3FE5D00A9F54F /* CCNodeLoaderLibrary.cpp in Sources */,
 				A6D98AF617E3FE5D00A9F54F /* CCParticleSystemQuadLoader.cpp in Sources */,
+				A6B9F7CC187842F00084CA7C /* SneakyButton.cpp in Sources */,
 				A6D98AF917E3FE5D00A9F54F /* CCScale9SpriteLoader.cpp in Sources */,
 				A6D98AFC17E3FE5D00A9F54F /* CCScrollViewLoader.cpp in Sources */,
 				A6D98AFF17E3FE5D00A9F54F /* CCSpriteLoader.cpp in Sources */,
@@ -2447,6 +2487,7 @@
 				A6D98C0017E3FE5E00A9F54F /* cpSpaceHash.c in Sources */,
 				A6D98C0217E3FE5E00A9F54F /* cpSpaceQuery.c in Sources */,
 				A6D98C0417E3FE5E00A9F54F /* cpSpaceStep.c in Sources */,
+				A6B9F7CE187842F00084CA7C /* SneakyJoystick.cpp in Sources */,
 				A6D98C0617E3FE5E00A9F54F /* cpSpatialIndex.c in Sources */,
 				A6D98C0817E3FE5E00A9F54F /* cpSweep1D.c in Sources */,
 				A6D98C0A17E3FE5E00A9F54F /* cpVect.c in Sources */,

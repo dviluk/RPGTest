@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Human.h"
+#include "SneakyJoystickSkinnedBase.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -37,6 +38,11 @@ public:
     Human* pNpcF;
     Human* pNpcG;
     Human* pNpcH;
+    
+    SneakyJoystick *joystickbase;
+    SneakyJoystickSkinnedBase *skinjoystick;
+    SneakyJoystick *joystick;
+    
     
     /*================================================
                           メソッド

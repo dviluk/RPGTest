@@ -90,7 +90,7 @@ bool Human::initWithFile(const char *pFileName)
 
     // add "HelloWorld" splash screen"
     pSprite = CCSprite::create();
-    CCLOG("[%p]initWithFile %p:",this, pSprite);
+ //   CCLOG("[%p]initWithFile %p:",this, pSprite);
 
     return true;
 }
@@ -105,7 +105,7 @@ void Human::addParent(cocos2d::CCNode *ptmpParent, int iTag)
     
     // add the sprite as a child to this layer
     pParent->addChild(pSprite, 0);
-    CCLOG("[%p]addParent %p",this,pSprite);
+ //   CCLOG("[%p]addParent %p",this,pSprite);
 
     tag = iTag;
     pSprite->setTag(iTag);
@@ -127,7 +127,7 @@ void Human::setPosition(const CCPoint& pos)
 {
     pSprite->setPosition(pos);
     Point = (CCPoint)pos;
-    CCLOG("[%p]setPosition %p",this,pSprite);
+ //   CCLOG("[%p]setPosition %p",this,pSprite);
 
 }
 
@@ -135,7 +135,7 @@ void Human::setPosition(const CCPoint& pos)
 void Human::walkAround(CCNode* parent,  bool flag)
 {
     CCSprite* pSprite = (CCSprite*)((CCLayer*)parent)->getChildByTag(tag);
-    CCLOG("[%p]walkAround:tag:%d pSprite:%p ",this,tag,pSprite);
+//    CCLOG("[%p]walkAround:tag:%d pSprite:%p ",this,tag,pSprite);
     
     if (flag)
     {
@@ -152,7 +152,7 @@ void Human::walkAround(CCNode* parent,  bool flag)
 
 void Human::walkRamdom(void)
 {
-    CCLOG("[%p]walkRamdom",this);
+ //   CCLOG("[%p]walkRamdom",this);
     int randNum = CCRANDOM_0_1()*4;
     
     switch (randNum)
@@ -201,7 +201,7 @@ void Human::walkFront(void)
 void Human::walkBack(void)
 {
     CCSprite* pSprite = (CCSprite*)this->pSprite;
-    CCLOG("[%p]walkBack:pSprite %p",this,pSprite);
+//    CCLOG("[%p]walkBack:pSprite %p",this,pSprite);
     CCPoint Point = pSprite->getPosition();
     Point.y += 32;
 
@@ -222,7 +222,7 @@ void Human::walkBack(void)
 void Human::walkLeft(void)
 {
     CCSprite* pSprite = (CCSprite*)this->pSprite;
-    CCLOG("[%p]walkLeft:pSprite %p",this,pSprite);
+//    CCLOG("[%p]walkLeft:pSprite %p",this,pSprite);
     CCPoint Point = pSprite->getPosition();
     Point.x -= 32;
 
@@ -244,7 +244,7 @@ void Human::walkLeft(void)
 void Human::walkRight(void)
 {
     CCSprite* pSprite = (CCSprite*)this->pSprite;
-    CCLOG("[%p]walkRight:pSprite %p",this,pSprite);
+//    CCLOG("[%p]walkRight:pSprite %p",this,pSprite);
     CCPoint Point = pSprite->getPosition();
     Point.x += 32;
 
