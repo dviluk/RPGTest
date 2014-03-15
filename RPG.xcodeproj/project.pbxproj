@@ -2581,7 +2581,6 @@
 					"-lxml2",
 					"-lz",
 					"-lsqlite3",
-					"-websockets",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"RPG/libs/Chipmunk/include/chipmunk\"";
@@ -2607,7 +2606,6 @@
 					"-lxml2",
 					"-lz",
 					"-lsqlite3",
-					"-websockets",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"RPG/libs/Chipmunk/include/chipmunk\"";
